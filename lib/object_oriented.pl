@@ -18,6 +18,7 @@ use v5.16;
 
 use lib 'lib';
 
+say("-----CAT-----");
 use Animal::Cat;
 
 # Create a Cat object
@@ -34,6 +35,7 @@ say $cat->getName();
 say $cat->getSound();
 
 # Inheriting object
+say("-----LION-----");
 use Animal::Lion;
 
 # Create object that inherits from Cat
@@ -41,3 +43,41 @@ my $king = new Animal::Lion("King", "No Owner");
 
 # Call overridden method
 say $king->getSound();
+
+say("-----PERSON-----");
+use Person::Person;
+
+my $object = new Person::Person( "Mohammad", "Saleem", 23234345);
+
+# Get first name which is set using constructor.
+my $firstName = $object->getFirstName();
+
+print "Before Setting First Name is : $firstName\n";
+
+# Now Set first name using helper function.
+$object->setFirstName( "Mohd." );
+
+# Now get first name set by helper function.
+$firstName = $object->getFirstName();
+print "After Setting First Name is : $firstName\n";
+
+say("-----EMPLOYEE-----");
+use Person::Employee;
+
+my $emp = new Person::Employee( "Ali", "Ahmed", 1234);
+
+# Get first name which is set using constructor.
+my $firstNameEmp = $emp->getFirstName();
+
+print "Before Setting First Name is : $firstNameEmp\n";
+
+# Now Set first name using helper function.
+$emp->setFirstName( "Mohd." );
+
+# Now get first name set by helper function.
+$firstNameEmp = $emp->getFirstName();
+print "After Setting First Name is : $firstNameEmp\n";
+
+# Get last name which is set using constructor.
+my $lastNameEmp = $emp->getLastName();
+say "Last Name is: $lastNameEmp";
