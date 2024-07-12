@@ -1,0 +1,52 @@
+Install on MacOS:
+https://chatgpt.com/share/91d7558d-730f-478a-a625-e9605ef8df64
+
+brew install cpanminus
+sudo cpanm --force AnyEvent
+sudo cpanm Perl::LanguageServer
+
+Ensure that your VS Code settings are correctly configured to use the Perl Language Server. 
+You can add the following to your settings.json file in VS Code:
+
+{
+  "perl.ssh": "Perl",
+  "perl.perlCmd": "/usr/bin/perl",
+  "perl.enable": true,
+  "perl.perlInc": [
+    "/Library/Perl/5.34",
+    "/Library/Perl/5.34/darwin-thread-multi-2level",
+    "/Network/Library/Perl/5.34",
+    "/Network/Library/Perl/5.34/darwin-thread-multi-2level",
+    "/Library/Perl/Updates/5.34.1",
+    "/System/Library/Perl/5.34",
+    "/System/Library/Perl/Extras/5.34",
+    "/System/Library/Perl/Extras/5.34/darwin-thread-multi-2level"
+  ]
+}
+
+perl -v
+perl -e 'print "Hello World\n"' 
+
+Exectue PERL file:
+cd <path to file>
+perl <file name>
+
+Database Stuff
+--------------
+https://chatgpt.com/share/bd62cd9e-6275-4cab-8792-08b9e4cd562e
+
+Download MySQL: https://dev.mysql.com/downloads/mysql/
+Download MySQL Workbench: https://dev.mysql.com/downloads/workbench/
+https://www.youtube.com/watch?v=vRrbNi1rtlo
+
+brew install mysql-client
+If you need to have mysql-client first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
+
+export PATH=$PATH:/usr/local/mysql/bin
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export CPPFLAGS="-I$(brew --prefix zstd)/include -I$(brew --prefix openssl@3)/include"
+export LDFLAGS="-L$(brew --prefix zstd)/lib -L$(brew --prefix openssl@3)/lib"
+
+sudo cpanm --force DBI
+sudo cpanm --force DBD::mysql
