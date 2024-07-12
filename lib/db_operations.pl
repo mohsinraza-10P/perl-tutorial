@@ -34,26 +34,42 @@ EOF
 my $InsertSth = $dbh->prepare($insertSql);
 $InsertSth->execute() or die "Error inserting record: " . $InsertSth->errstr;
 $InsertSth->finish();
-$dbh->commit or die "Error committing changes: " . $dbh->errstr;
+$dbh->commit() or die "Error committing changes: " . $dbh->errstr();
 
 say "Record inserted successfully!";
 
 # Select
 print "Enter age to filter records: ";
 my $filterAge = <STDIN>;
-my $selectSql = <<EOF;
-SELECT First_Name as FirstName, Last_Name as LastName, Email, Age
-FROM Person
-WHERE Age > ?
+selectDataByAge($filterAge);
+
+# Update
+my $updateSql = <<EOF;
+UPDATE Person
+SET AGE = AGE + 1
+WHERE AGE > ?
 EOF
 
-my $selectSth = $dbh->prepare($selectSql);
-$selectSth->execute($filterAge) or die $DBI::errstr;
-say "Number of rows found : ", $selectSth->rows;
-while (my @row = $selectSth->fetchrow_array()) {
-    my ($first_name, $last_name, $email, $age) = @row;
-    say "First Name = $first_name, Last Name = $last_name, Email = $email, Age = $age";
-}
-$selectSth->finish();
+my $updateSth = $dbh->prepare($updateSql);
+$updateSth->execute($filterAge) or die "Error updating record: " . $updateSth->errstr;
+say "Number of rows updated : ", $updateSth->rows;
+$updateSth->finish();
+$dbh->commit() or die "Error committing changes: " . $dbh->errstr();
+
+selectDataByAge($filterAge);
 
 $dbh->disconnect();
+
+sub selectDataByAge {
+    my ($age) = @_;
+
+    my $selectSql = "SELECT * FROM PERSON WHERE AGE > ?";
+    my $selectSth = $dbh->prepare($selectSql);
+    $selectSth->execute($age) or die $DBI::errstr;
+    say "Number of rows found : ", $selectSth->rows;
+    while (my @row = $selectSth->fetchrow_array()) {
+        my ($id, $first_name, $last_name, $email, $age) = @row;
+        say "ID = $id, First Name = $first_name, Last Name = $last_name, Email = $email, Age = $age";
+    }
+    $selectSth->finish();
+}
