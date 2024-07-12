@@ -7,7 +7,6 @@ use DBI;
 use feature 'say';
 
 # Database connection
-
 my $driver = "mysql";
 my $database = 'test_db';
 my $hostname = 'localhost';
@@ -26,10 +25,10 @@ my $dbh = DBI->connect($dsn, $user, $password, {
 say "Connected to the database successfully!";
 
 # Insert
-my $age = int(rand 50);
+my $personAge = int(rand 50);
 my $insertSql = <<EOF;
 INSERT INTO Person (First_Name, Last_Name, Email, Age)
-VALUES ('Mohsin', 'Raza', 'mohsin.raza\@10pearls.com', '$age')
+VALUES ('Mohsin', 'Raza', 'mohsin.raza\@10pearls.com', '$personAge')
 EOF
 
 my $InsertSth = $dbh->prepare($insertSql);
@@ -38,5 +37,21 @@ $InsertSth->finish();
 $dbh->commit or die "Error committing changes: " . $dbh->errstr;
 
 say "Record inserted successfully!";
+
+# Select
+my $selectSql = <<EOF;
+SELECT First_Name as FirstName, Last_Name as LastName, Email, Age
+FROM Person
+WHERE Age > 20
+EOF
+
+my $selectSth = $dbh->prepare($selectSql);
+$selectSth->execute() or die $DBI::errstr;
+say "Number of rows found : ", $selectSth->rows;
+while (my @row = $selectSth->fetchrow_array()) {
+    my ($first_name, $last_name, $email, $age) = @row;
+    say "First Name = $first_name, Last Name = $last_name, Email = $email, Age = $age";
+}
+$selectSth->finish();
 
 $dbh->disconnect();
