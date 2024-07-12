@@ -39,14 +39,16 @@ $dbh->commit or die "Error committing changes: " . $dbh->errstr;
 say "Record inserted successfully!";
 
 # Select
+print "Enter age to filter records: ";
+my $filterAge = <STDIN>;
 my $selectSql = <<EOF;
 SELECT First_Name as FirstName, Last_Name as LastName, Email, Age
 FROM Person
-WHERE Age > 20
+WHERE Age > ?
 EOF
 
 my $selectSth = $dbh->prepare($selectSql);
-$selectSth->execute() or die $DBI::errstr;
+$selectSth->execute($filterAge) or die $DBI::errstr;
 say "Number of rows found : ", $selectSth->rows;
 while (my @row = $selectSth->fetchrow_array()) {
     my ($first_name, $last_name, $email, $age) = @row;
