@@ -58,12 +58,28 @@ $dbh->commit() or die "Error committing changes: " . $dbh->errstr();
 
 selectDataByAge($filterAge);
 
+# Delete
+my $deleteSql = <<EOF;
+DELETE FROM Person
+WHERE ID < 5
+EOF
+
+my $deleteSth = $dbh->prepare($deleteSql);
+$deleteSth->execute() or die "Error deleting record: " . $deleteSth->errstr;
+say "Number of rows deleted : ", $deleteSth->rows;
+$deleteSth->finish();
+$dbh->commit() or die "Error committing changes: " . $dbh->errstr();
+
+selectDataByAge();
+
 $dbh->disconnect();
 
 sub selectDataByAge {
     my ($age) = @_;
 
-    my $selectSql = "SELECT * FROM PERSON WHERE AGE > ?";
+    $age ||= 0;
+
+    my $selectSql = "SELECT * FROM PERSON WHERE AGE > ? ORDER BY ID";
     my $selectSth = $dbh->prepare($selectSql);
     $selectSth->execute($age) or die $DBI::errstr;
     say "Number of rows found : ", $selectSth->rows;
