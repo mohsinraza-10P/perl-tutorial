@@ -1,3 +1,7 @@
+PERL Terms:
+DBI = Database Independent Interface
+CGI = Common Gateway Interface (In Perl, CGI (Common Gateway Interface) is a protocol which defines the interaction of web servers with some executable programs in order to produce dynamic web pages)
+
 Install on MacOS:
 https://chatgpt.com/share/91d7558d-730f-478a-a625-e9605ef8df64
 
@@ -50,3 +54,47 @@ export LDFLAGS="-L$(brew --prefix zstd)/lib -L$(brew --prefix openssl@3)/lib"
 
 sudo cpanm --force DBI
 sudo cpanm --force DBD::mysql
+
+Apache
+------
+https://chatgpt.com/share/c3190711-e307-4574-82ff-aaf1de8fbc43
+https://chatgpt.com/share/73fd69c5-b219-484d-b0f1-80fe9f888789
+https://chatgpt.com/share/16f18253-eef1-4020-ada2-1117bb1904fe
+
+brew install apache2
+brew services start httpd
+
+Go to path "/opt/homebrew/etc/httpd/httpd.conf" and do following changes:
+1) LoadModule cgi_module /usr/libexec/apache2/mod_cgi.so
+2) <IfModule cgi_module>
+        <Directory "/opt/homebrew/var/www/cgi-bin">
+            AllowOverride None
+            Options +ExecCGI
+            Require all granted
+        </Directory>
+    </IfModule>
+3) ServerName localhost
+4) Listen 8081
+5) Uncomment "AddHandler cgi-script .cgi"
+6) Optional
+Go to path "/opt/homebrew/var/www/index.html" and update content of your choice:
+<html>
+<body>
+  <h1>Apache HTTP Server!</h1>
+  <h3>Syed Mohsin Raza<h3>
+</body>
+</html>
+7) Create test perl cgi script
+#!/usr/bin/perl
+print "Content-type: text/html\n\n";
+print "<html><head><title>Test CGI</title></head><body>";
+print "<h1>Hello, CGI!</h1>";
+print "</body></html>";
+
+8) chmod 755 <path_to_script>
+7) sudo apachectl restart
+
+Now access "http://localhost:8081/cgi-bin/"
+
+grep DocumentRoot httpd.conf
+pushd /opt/homebrew/var/www/cgi-bin
