@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 # chmod 755 hello.cgi
+# ./hello.cgi
 
 use warnings;
 use strict;
