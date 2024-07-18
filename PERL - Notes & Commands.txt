@@ -84,17 +84,19 @@ Go to path "/opt/homebrew/var/www/index.html" and update content of your choice:
   <h3>Syed Mohsin Raza<h3>
 </body>
 </html>
-7) Create test perl cgi script
+7) Create test perl cgi script "test.cgi"
 #!/usr/bin/perl
 print "Content-type: text/html\n\n";
 print "<html><head><title>Test CGI</title></head><body>";
 print "<h1>Hello, CGI!</h1>";
 print "</body></html>";
 
-8) chmod 755 <path_to_script>
-7) sudo apachectl restart
+8) chmod 755 test.cgi
+9) sudo apachectl restart
 
-Now access "http://localhost:8081/cgi-bin/"
+Now access "http://localhost:8081/cgi-bin/" or via cmd "./test.cgi". Url params can be passed as "./test.cgi user=abc pass=123"
 
 grep DocumentRoot httpd.conf
 pushd /opt/homebrew/var/www/cgi-bin
+
+
