@@ -15,7 +15,12 @@ my $obj = new CGI();
 sub main {
     print $obj->header();
 
-    my $query = $obj->param("query");
+    # Fetch all params
+    my @query = $obj->param();
+    # Join all params separated by " " along with values
+    # param=value param=value param=value
+    @query = map($_ . "=" . $obj->param($_), @query);
+    my $params = join(" ", @query);
 
     print <<HTML;
 <html>
@@ -24,12 +29,12 @@ sub main {
 </head>
 <body>
 <h1>CGI - Forms</h1>
-<form action="forms.cgi" method="get">
+<form action="forms.cgi" method="post">
     <input type="text" name="query" />
     <input type="hidden" name="go" value="true" />
     <input type="submit" name="submit" value="Done" />
 </form>
-<p>Last submitted: $query</p>
+<p>Last submitted: $params</p>
 </body>
 </html>
 HTML
