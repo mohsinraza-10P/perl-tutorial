@@ -1,6 +1,8 @@
 PERL Terms:
 DBI = Database Independent Interface
 CGI = Common Gateway Interface (In Perl, CGI (Common Gateway Interface) is a protocol which defines the interaction of web servers with some executable programs in order to produce dynamic web pages)
+Package = A collection of code which resides in its own namespace.
+Module = A package defined in a file having the same name as that of the package and having extension .pm.
 
 Install on MacOS:
 https://chatgpt.com/share/91d7558d-730f-478a-a625-e9605ef8df64
