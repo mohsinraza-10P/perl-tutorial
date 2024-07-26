@@ -3,6 +3,7 @@ DBI = Database Independent Interface
 CGI = Common Gateway Interface (In Perl, CGI (Common Gateway Interface) is a protocol which defines the interaction of web servers with some executable programs in order to produce dynamic web pages)
 Package = A collection of code which resides in its own namespace.
 Module = A package defined in a file having the same name as that of the package and having extension .pm.
+POD = A markup language used for writing documentation for Perl, Perl programs, and Perl modules.
 
 Install on MacOS:
 https://chatgpt.com/share/91d7558d-730f-478a-a625-e9605ef8df64
@@ -101,4 +102,10 @@ Now access "http://localhost:8081/cgi-bin/" or via cmd "./test.cgi". Url params 
 grep DocumentRoot httpd.conf
 pushd /opt/homebrew/var/www/cgi-bin
 
+POD Stuff
+---------
+https://chatgpt.com/share/f661871c-f586-474b-83ef-2b9a779d6727
 
+sudo cpan -f Pod::Html
+
+pod2html filname.pod > filname.html

@@ -1,0 +1,21 @@
+# pod2html list_pod.pod > list_pod.html
+
+=head2 An Example List
+
+=over 4
+
+=item * This is a bulleted list.
+=item * Here's another item.
+
+=back
+
+=begin html
+
+<p>
+Here's some embedded HTML.  In this block I can
+include images, apply <span style="color: green">
+styles</span>, or do anything else I can do with
+HTML.  pod parsers that aren't outputting HTML will
+completely ignore it.
+</p>
+=end html

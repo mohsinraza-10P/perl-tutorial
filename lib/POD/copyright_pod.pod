@@ -1,0 +1,5 @@
+# pod2html copyright_pod.pod > copyright_pod.html
+
+=head1 SYNOPSIS
+Copyright 2005 [TUTORIALSOPOINT].
+=cut
