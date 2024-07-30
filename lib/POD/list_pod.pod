@@ -5,6 +5,7 @@
 =over 4
 
 =item * This is a bulleted list.
+
 =item * Here's another item.
 
 =back
@@ -18,4 +19,5 @@ styles</span>, or do anything else I can do with
 HTML.  pod parsers that aren't outputting HTML will
 completely ignore it.
 </p>
-=end html
+
+=cut
