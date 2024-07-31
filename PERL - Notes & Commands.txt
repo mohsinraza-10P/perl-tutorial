@@ -109,3 +109,7 @@ https://chatgpt.com/share/f661871c-f586-474b-83ef-2b9a779d6727
 sudo cpan -f Pod::Html
 
 pod2html filname.pod > filname.html
+
+Regular Expressions
+-------------------
+https://chatgpt.com/share/908547bc-65a8-4a01-b272-6016bf797ef7
