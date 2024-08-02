@@ -113,3 +113,11 @@ pod2html filname.pod > filname.html
 Regular Expressions
 -------------------
 # https://chatgpt.com/share/908547bc-65a8-4a01-b272-6016bf797ef7
+
+Interview notes:
+- How to get array length?
+- What if I print @array with $array. What is going to be the output?
+- How to get parameters in subroutine?
+- In OOP, what does class/shift means? How does the constructor takes arguments and assign it to properties?
+- bless keyword? Provision a class object to access class methods.
+- Reason why moved to class from struct?
